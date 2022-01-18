@@ -4,20 +4,17 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-// 1. Import the extendTheme function
-import { extendTheme, NativeBaseProvider } from "native-base";
 import * as React from "react";
-import AppBottomTab from "./App/Navigator/AppBottomTab";
-import ProfileNavigator from "./App/Navigator/ProfileNavigator";
-import Friend from "./App/Views/Friend";
-import Home from "./App/Views/Home";
+import ProfileNavigator from "../Navigator/ProfileNavigator";
+import Friend from "../Views/Friend";
+import Home from "../Views/Home";
+import Login from "../Views/Login";
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+export default function AppBottomTab() {
   return (
     <Tab.Navigator
-      initialRouteName="Overview"
+      initialRouteName="Login"
       screenOptions={{
         tabBarActiveTintColor: "#FF7300",
       }}
@@ -43,7 +40,7 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="ProfileNavigator"
         component={ProfileNavigator}
         options={{
           tabBarLabel: "Profile",
@@ -52,26 +49,16 @@ function MyTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Login"
+        component={Login}
+        options={{
+          tabBarLabel: "Login",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="login" size={24} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
-  );
-}
-
-// 2. Extend the theme to include custom colors, fonts, etc
-const newColorTheme = {
-  brand: {
-    900: "#8287af",
-    800: "#7c83db",
-    700: "#b3bef6",
-  },
-};
-const theme = extendTheme({ colors: newColorTheme });
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <NativeBaseProvider theme={theme}>
-        <AppBottomTab />
-      </NativeBaseProvider>
-    </NavigationContainer>
   );
 }

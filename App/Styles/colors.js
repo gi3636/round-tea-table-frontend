@@ -1,0 +1,20 @@
+export default {
+  primary: "#22c164",
+  secondary: "#e4fff0",
+  subtracted: "rgba(255,255,255, 0.2)",
+  subtractedMore: "rgba(255,255,255, 0.4)",
+
+  blackOpacity: "rgba(0,0,0, 0.4)",
+  blackOpacityDarker: "rgba(0,0,0, 0.7)",
+  purple: "#6c45e2",
+  purple_secondary: "#F4F0FF",
+  yellow: "#f6ca70",
+  yellow_secondary: "#fffaee",
+  red: "#ff3e30",
+  red_secondary: "#fef1ef",
+  dark: "#0c0c0c",
+  medium: "#8c8c8c",
+  mediumLight: "#d4d4d4",
+  light: "#f5f5f5",
+  white: "#ffffff",
+};
