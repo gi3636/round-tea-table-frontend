@@ -1,64 +1,68 @@
+import React from "react";
 import {
-  Box,
-  HStack,
-  Image,
-  NativeBaseProvider,
-  Pressable,
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
   Text,
-  VStack,
-} from "native-base";
-import * as React from "react";
-
-export default function Home() {
+  View,
+} from "react-native";
+import HomeTopTabNavigator from "../../Navigator/HomeTopTabNavigator";
+import colors from "../../Styles/colors";
+import { Video } from "expo-av";
+import VideoPlayer from "expo-video-player";
+/* 屏幕的宽度 */
+const screenWidth = Dimensions.get("screen").width;
+/* 屏幕的高度 */
+const screenHeight = Dimensions.get("screen").height;
+const Home = () => {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
   return (
-    <NativeBaseProvider>
-      <Box
-        bg="primary.600"
-        py="4"
-        px="3"
-        rounded="md"
-        alignSelf="center"
-        width={375}
-        maxWidth="100%"
-      >
-        <HStack justifyContent="space-between">
-          <Box justifyContent="space-between">
-            <VStack space="2">
-              <Text fontSize="sm" color="white">
-                Today @ 9PM
-              </Text>
-              <Text color="white" fontSize="lg">
-                Let's talk about avatar!
-              </Text>
-            </VStack>
-            <Pressable
-              rounded="sm"
-              bg="primary.400"
-              alignSelf="flex-start"
-              py="4"
-              px="3"
-            >
-              <Text
-                textTransform="uppercase"
-                fontSize="sm"
-                fontWeight="bold"
-                color="white"
-              >
-                Remind me
-              </Text>
-            </Pressable>
-          </Box>
-          <Image
-            source={{
-              uri: "https://media.vanityfair.com/photos/5ba12e6d42b9d16f4545aa19/3:2/w_1998,h_1332,c_limit/t-Avatar-The-Last-Airbender-Live-Action.jpg",
-            }}
-            alt="Aang flying and surrounded by clouds"
-            height="100"
-            rounded="full"
-            width="100"
-          />
-        </HStack>
-      </Box>
-    </NativeBaseProvider>
+    <SafeAreaView style={styles.container}>
+      <StatusBar animated={true} backgroundColor={colors.primary} />
+      {/* <View style={styles.video}>
+        <VideoPlayer
+          videoProps={{
+            shouldPlay: false,
+            resizeMode: Video.RESIZE_MODE_CONTAIN,
+            source: {
+              // uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+            },
+          }}
+          style={{
+            videoBackgroundColor: "black",
+          }}
+        />
+      </View> */}
+      <HomeTopTabNavigator />
+    </SafeAreaView>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  container1: {
+    width: screenWidth,
+    height: screenHeight,
+    backgroundColor: colors.primary,
+    marginBottom: 1,
+  },
+  video: {
+    position: "relative",
+    top: 0, // shadow on
+    right: 0,
+    zIndex: -1,
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export default Home;

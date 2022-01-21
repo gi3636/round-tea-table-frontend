@@ -1,36 +1,38 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Icon, Input } from "react-native-elements";
-export default function Friend() {
+import { StyleSheet, View, Text } from "react-native";
+import PagerView from "react-native-pager-view";
+
+const Friend = () => {
   return (
-    <>
-      <Input placeholder="BASIC INPUT" />
-
-      <Input
-        placeholder="INPUT WITH ICON"
-        leftIcon={{ type: "font-awesome", name: "chevron-left" }}
-      />
-
-      <Input
-        placeholder="INPUT WITH CUSTOM ICON"
-        leftIcon={<Icon name="user" size={24} color="black" />}
-      />
-
-      <Input
-        placeholder="Comment"
-        leftIcon={{ type: "font-awesome", name: "comment" }}
-        onChangeText={(value) => this.setState({ comment: value })}
-      />
-
-      <Input
-        placeholder="INPUT WITH ERROR MESSAGE"
-        errorStyle={{ color: "red" }}
-        errorMessage="ENTER A VALID ERROR HERE"
-      />
-
-      <Input placeholder="Password" secureTextEntry={true} />
-    </>
+    <View style={{ flex: 1 }}>
+      <PagerView
+        style={styles.viewPager}
+        initialPage={0}
+        orientation="vertical"
+      >
+        <View style={styles.page} key="1">
+          <Text>First page</Text>
+          <Text>Swipe ➡️</Text>
+        </View>
+        <View style={styles.page} key="2">
+          <Text>Second page</Text>
+        </View>
+        <View style={styles.page} key="3">
+          <Text>Third page</Text>
+        </View>
+      </PagerView>
+    </View>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  viewPager: {
+    flex: 1,
+  },
+  page: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export default Friend;

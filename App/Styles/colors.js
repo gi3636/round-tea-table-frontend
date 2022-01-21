@@ -1,9 +1,12 @@
 export default {
-  primary: "#22c164",
-  secondary: "#e4fff0",
-  subtracted: "rgba(255,255,255, 0.2)",
-  subtractedMore: "rgba(255,255,255, 0.4)",
-
+  primary: "#5E72E4",
+  secondary: "#11CDEF",
+  placeholder: "#ADB5BD",
+  main_font: "#525F7F",
+  background: "#F4F5F7",
+  success:"#2DCE89",
+  black:"#212529",
+  danger:"#F5365C",
   blackOpacity: "rgba(0,0,0, 0.4)",
   blackOpacityDarker: "rgba(0,0,0, 0.7)",
   purple: "#6c45e2",
@@ -17,4 +20,5 @@ export default {
   mediumLight: "#d4d4d4",
   light: "#f5f5f5",
   white: "#ffffff",
+  
 };
