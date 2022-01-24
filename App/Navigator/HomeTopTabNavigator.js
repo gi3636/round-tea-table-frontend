@@ -35,14 +35,12 @@ export default HomeTopTabNavigator = () => {
           width: "20%",
           left: "7%",
           top: "90%",
-          zIndex: 100,
         },
         tabBarIndicatorContainerStyle: {
           backgroundColor: "transparent",
-          zIndex: 100,
         },
         tabBarStyle: {
-          zIndex: 100,
+          position: "absolute",
           paddingTop: insets.top,
           alignSelf: "center",
           width: "60%",

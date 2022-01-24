@@ -17,8 +17,7 @@ import { color } from "react-native-elements/dist/helpers";
 const screenWidth = Dimensions.get("window").width;
 /* 屏幕的高度 */
 const screenHeight = Dimensions.get("window").height;
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+
 export default function VideoPage(props) {
   const { number, id, videoUrl } = props;
   const video = React.useRef(null);
@@ -42,15 +41,16 @@ export default function VideoPage(props) {
           videoProps={{
             shouldPlay: active,
             resizeMode: Video.RESIZE_MODE_CONTAIN,
+            timeVisible: true,
             source: {
-              // uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-              uri: videoUrl,
+              uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              // uri: videoUrl,
             },
           }}
           style={{
             top: -200,
             videoBackgroundColor: "transparent",
-            height: screenHeight - 100,
+            height: screenHeight - 50,
             width: screenWidth + 3,
           }}
         />
@@ -134,7 +134,7 @@ export default function VideoPage(props) {
           @林锋吉
         </Text>
         <Text
-          numberOfLines={5}
+          numberOfLines={4}
           ellipsizeMode="tail"
           style={{
             width: "60%",
@@ -151,8 +151,8 @@ export default function VideoPage(props) {
 }
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: screenWidth,
-    height: screenHeight - 100,
   },
   video: {
     position: "absolute",
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     position: "absolute",
     right: 5,
-    top: "53%",
+    bottom: "10%",
   },
   iconContainer: {
     alignItems: "center",
@@ -178,8 +178,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
   authorDetailsContainer: {
-    position: "relative",
-    top: "62%",
+    position: "absolute",
+    bottom: "10%",
+    width: screenWidth,
     left: 10,
     opacity: 0.95,
   },

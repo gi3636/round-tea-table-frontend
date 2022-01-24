@@ -10,8 +10,6 @@ class CustomTabBar extends Component {
       <View
         style={{
           position: "relative",
-          backgroundColor: colors.primary,
-          zIndex: 100,
         }}
       >
         <MaterialTopTabBar {...this.props} />

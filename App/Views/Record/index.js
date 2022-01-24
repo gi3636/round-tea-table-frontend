@@ -5,6 +5,7 @@ export default function Record() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>录制</Text>
+     
     </View>
   );
 }

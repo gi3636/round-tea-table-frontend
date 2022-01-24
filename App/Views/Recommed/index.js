@@ -40,7 +40,7 @@ const Recommend = () => {
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
-        style={{ flex: 1 }}
+        style={{ flex: 1, }}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         colors={[colors.primary, colors.secondary]}
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   page: {
-    justifyContent: "center",
     alignItems: "center",
   },
 });

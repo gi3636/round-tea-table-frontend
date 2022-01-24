@@ -44,24 +44,6 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-  },
-  container1: {
-    width: screenWidth,
-    height: screenHeight,
-    backgroundColor: colors.primary,
-    marginBottom: 1,
-  },
-  video: {
-    position: "relative",
-    top: 0, // shadow on
-    right: 0,
-    zIndex: -1,
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
 
