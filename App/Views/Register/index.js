@@ -25,40 +25,45 @@ import { saveUser } from "../../Redux/userSlice";
 import { updateLoading } from "../../Redux/loadingSlice";
 import AwesomeLoading from "react-native-awesome-loading";
 import { saveStorageToken } from "../../Utils/storage";
-export default function Login({ navigation }, props) {
+export default function Register({ navigation }, props) {
   //react-hooks-form 组件
-  const { control, handleSubmit, setValue } = useForm({
-    defaultValues: { username: "123123", password: "123456" },
+  const { control, handleSubmit, setValue, watch } = useForm({
+    defaultValues: {
+      username: "12345678",
+      password: "123456",
+      comfirmPassword: "123456",
+    },
   });
-  //同意隐私政策
-  const [check, setCheck] = useState(false);
+  //监听并获取password的值
+  const pwd = watch("password");
   //网络请求
   const client = request.create();
   //获取store 的user
   const user = useSelector((state) => state.user.userObj);
   const dispatch = useDispatch();
 
-  function login(data) {
-    if (!check) {
-      Alert.alert("请同意隐私政策后再点击登入。");
-      return;
-    }
+  function register(data) {
     dispatch(updateLoading());
 
     client
-      .login({
+      .register({
         username: data.username,
         password: data.password,
       })
       .then(function (response) {
         let result = response.data;
+        console.log(result);
         if (result.success) {
-          let token = result.data.token;
-          let decoded = jwt_decode(token);
-          dispatch(saveUser(decoded));
-          saveStorageToken(token);
+          Alert.alert("注册成功", "", [
+            {
+              text: "确认",
+              onPress: () => {
+                navigation.goBack();
+              },
+            },
+          ]);
         } else {
-          ToastAndroid.show(data.message, ToastAndroid.SHORT);
+          ToastAndroid.show(result.message, ToastAndroid.SHORT);
         }
         dispatch(updateLoading());
       })
@@ -102,65 +107,7 @@ export default function Login({ navigation }, props) {
               }}
               placeholder="用户名"
               containerStyle={{
-                top: 20,
-                height: 90,
-              }}
-              inputContainerStyle={{
-                borderColor: error ? colors.danger : "transparent",
-                borderWidth: 1,
-                backgroundColor: "white",
-                borderRadius: 4,
-                margin: 6,
-                elevation: 3,
-              }}
-              inputStyle={{
-                backgroundColor: "white",
-                padding: 12,
-                color: colors.main_font,
-              }}
-            />
-            {error && (
-              <Text
-                style={{
-                  color: colors.danger,
-                  marginLeft: 15,
-                  top: -7,
-                  alignSelf: "stretch",
-                }}
-              >
-                {error.message || "错误"}
-              </Text>
-            )}
-          </>
-        )}
-      ></Controller>
-
-      <Controller
-        rules={{ required: "密码不能为空" }}
-        control={control}
-        name="password"
-        render={({ field: { value, onChange }, fieldState: { error } }) => (
-          <>
-            <Input
-              onChangeText={onChange}
-              disabledInputStyle={{ background: "#ddd" }}
-              leftIcon={<LockIcon></LockIcon>}
-              leftIconContainerStyle={{ marginLeft: 10 }}
-              value={value}
-              rightIcon={
-                <Icon
-                  onPress={clear("password")}
-                  name="close"
-                  size={20}
-                  color={colors.placeholder}
-                />
-              }
-              rightIconContainerStyle={{
-                display: value ? "flex" : "none",
-                margin: 5,
-              }}
-              placeholder="密码"
-              containerStyle={{
+                top: 16,
                 height: 80,
               }}
               inputContainerStyle={{
@@ -182,9 +129,122 @@ export default function Login({ navigation }, props) {
                 style={{
                   color: colors.danger,
                   marginLeft: 15,
-                  top: -15,
                   alignSelf: "stretch",
-                  paddingBottom: 10,
+                }}
+              >
+                {error.message || "错误"}
+              </Text>
+            )}
+          </>
+        )}
+      ></Controller>
+      <Controller
+        name="password"
+        control={control}
+        rules={{ required: "密码不能为空" }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <Input
+              onChangeText={onChange}
+              disabledInputStyle={{ background: "#ddd" }}
+              leftIcon={<LockIcon></LockIcon>}
+              leftIconContainerStyle={{ marginLeft: 10 }}
+              value={value}
+              rightIcon={
+                <Icon
+                  onPress={clear("password")}
+                  name="close"
+                  size={20}
+                  color={colors.placeholder}
+                />
+              }
+              rightIconContainerStyle={{
+                margin: 5,
+                display: value ? "flex" : "none",
+              }}
+              placeholder="密码"
+              containerStyle={{
+                height: 60,
+              }}
+              inputContainerStyle={{
+                borderColor: error ? colors.danger : "transparent",
+                borderWidth: 1,
+                backgroundColor: "white",
+                borderRadius: 4,
+                margin: 6,
+                elevation: 3,
+              }}
+              inputStyle={{
+                backgroundColor: "white",
+                padding: 12,
+                color: colors.main_font,
+              }}
+            />
+            {error && (
+              <Text
+                style={{
+                  color: colors.danger,
+                  marginLeft: 15,
+                  alignSelf: "stretch",
+                }}
+              >
+                {error.message || "错误"}
+              </Text>
+            )}
+          </>
+        )}
+      ></Controller>
+      <Controller
+        name="comfirmPassword"
+        control={control}
+        rules={{
+          required: "确认密码不能为空",
+          validate: (value) => value === pwd || "密码不一致",
+        }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <Input
+              onChangeText={onChange}
+              disabledInputStyle={{ background: "#ddd" }}
+              leftIcon={<LockIcon></LockIcon>}
+              leftIconContainerStyle={{ marginLeft: 10 }}
+              value={value}
+              rightIcon={
+                <Icon
+                  onPress={clear("comfirm_password")}
+                  name="close"
+                  size={20}
+                  color={colors.placeholder}
+                />
+              }
+              rightIconContainerStyle={{
+                margin: 5,
+                display: value ? "flex" : "none",
+              }}
+              placeholder="确认密码"
+              containerStyle={{
+                height: 60,
+              }}
+              inputContainerStyle={{
+                borderColor: error ? colors.danger : "transparent",
+                borderWidth: 1,
+                backgroundColor: "white",
+                borderRadius: 4,
+                margin: 6,
+                elevation: 3,
+              }}
+              inputStyle={{
+                backgroundColor: "white",
+                padding: 12,
+                color: colors.main_font,
+              }}
+            />
+            {error && (
+              <Text
+                style={{
+                  color: colors.danger,
+                  marginLeft: 15,
+                  alignSelf: "stretch",
                 }}
               >
                 {error.message || "错误"}
@@ -194,52 +254,10 @@ export default function Login({ navigation }, props) {
         )}
       ></Controller>
 
-      <View style={{ flexDirection: "row", top: -12 }}>
-        <Text style={{ paddingLeft: 16, flex: 1, color: colors.main_font }}>
-          忘记密码？
-        </Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Register");
-          }}
-        >
-          <Text
-            style={{
-              flex: 1,
-              color: colors.main_font,
-              textAlign: "right",
-              paddingRight: 16,
-            }}
-          >
-            注册新用户
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.checkBoxContainer}>
-        <CheckBox
-          center={true}
-          containerStyle={{
-            backgroundColor: "transparent",
-            borderWidth: 0,
-            padding: 0,
-            margin: 0,
-            top: 1,
-          }}
-          checked={check}
-          checkedIcon="check-square"
-          checkedColor={colors.primary}
-          onPress={() => setCheck(!check)}
-        />
-        <View style={styles.checkBoxTextContainer}>
-          <Text style={{ color: colors.main_font }}>我同意</Text>
-          <Text style={{ color: colors.primary }}>隐私政策</Text>
-        </View>
-      </View>
       <Button
         style
-        onPress={handleSubmit(login)}
-        title={"登入"}
+        onPress={handleSubmit(register)}
+        title={"注册"}
         buttonStyle={{
           backgroundColor: colors.primary,
           borderRadius: 4,

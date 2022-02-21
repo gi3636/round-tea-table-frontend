@@ -5,22 +5,7 @@ import PagerView from "react-native-pager-view";
 const Friend = () => {
   return (
     <View style={{ flex: 1 }}>
-      <PagerView
-        style={styles.viewPager}
-        initialPage={0}
-        orientation="vertical"
-      >
-        <View style={styles.page} key="1">
-          <Text>First page</Text>
-          <Text>Swipe ➡️</Text>
-        </View>
-        <View style={styles.page} key="2">
-          <Text>Second page</Text>
-        </View>
-        <View style={styles.page} key="3">
-          <Text>Third page</Text>
-        </View>
-      </PagerView>
+      
     </View>
   );
 };

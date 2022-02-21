@@ -12,7 +12,6 @@ import { Button } from "react-native-elements";
 import colors from "../../Styles/colors";
 import VideoPlayer from "expo-video-player";
 import { Avatar } from "react-native-elements";
-import { color } from "react-native-elements/dist/helpers";
 /* 屏幕的宽度 */
 const screenWidth = Dimensions.get("window").width;
 /* 屏幕的高度 */
@@ -33,7 +32,6 @@ export default function VideoPage(props) {
     }
     LogBox.ignoreAllLogs();
   }, [number]);
-  const videoRef = useRef(null);
   return (
     <View style={styles.container}>
       <View style={styles.video}>

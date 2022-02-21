@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../Config/setting";
+import { getStorageToken } from "../Utils/storage";
 
 const create = () => {
   const instance = axios.create({
@@ -12,7 +13,13 @@ const create = () => {
   instance.interceptors.request.use(
     async function (config) {
       console.log("请求前拦截");
-      // 在发送请求之前做些什么
+      const token = null;
+      getStorageToken().then(function (value) {
+        token = value;
+      });
+      if (token) {
+        config.headers["token"] = token;
+      }
       return config;
     },
     function (error) {

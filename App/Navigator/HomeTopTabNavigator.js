@@ -5,7 +5,9 @@ import CustomTabBar from "../Components/CustomTabBar";
 import colors from "../Styles/colors";
 import Follow from "../Views/Follow";
 import Friend from "../Views/Friend";
+import Recommend from "../Views/Recommed";
 import Recommed from "../Views/Recommed";
+import Register from "../Views/Register";
 const Tab = createMaterialTopTabNavigator();
 
 export default HomeTopTabNavigator = () => {
@@ -48,10 +50,11 @@ export default HomeTopTabNavigator = () => {
           elevation: 0, // shadow on Android
           shadowOpacity: 0, // shadow on iOS,
           shadowRadius: 0, // shadow blur on iOS
+          zIndex: 1,
         },
       }}
     >
-      <Tab.Screen name="推荐" component={Recommed} />
+      <Tab.Screen name="推荐" component={Recommend} />
       <Tab.Screen name="朋友" component={Friend} />
       <Tab.Screen name="关注" component={Follow} />
     </Tab.Navigator>

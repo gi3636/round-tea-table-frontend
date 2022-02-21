@@ -21,21 +21,6 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar animated={true} backgroundColor={colors.primary} />
-      {/* <View style={styles.video}>
-        <VideoPlayer
-          videoProps={{
-            shouldPlay: false,
-            resizeMode: Video.RESIZE_MODE_CONTAIN,
-            source: {
-              // uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-              uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-            },
-          }}
-          style={{
-            videoBackgroundColor: "black",
-          }}
-        />
-      </View> */}
       <HomeTopTabNavigator />
     </SafeAreaView>
   );
